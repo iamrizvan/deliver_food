@@ -1,8 +1,9 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/constants.dart';
 import 'details_screen.dart';
+import './widget/food_card.dart';
+import './widget/category_title.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,7 +22,8 @@ class MyApp extends StatelessWidget {
         textTheme: TextTheme(
             headline: TextStyle(fontWeight: FontWeight.bold),
             button: TextStyle(fontWeight: FontWeight.bold),
-            title: TextStyle(fontWeight: FontWeight.bold)),
+            title: TextStyle(fontWeight: FontWeight.bold),
+            body1:TextStyle(color:kTextColor)),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomeScreen(),
@@ -33,6 +35,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton:Container(
+        padding: EdgeInsets.all(10),
+        height: 60,
+        width:60,
+        decoration:BoxDecoration(
+          shape:BoxShape.circle,
+          color:kPrimaryColor.withOpacity(0.26)
+        ),
+        child: Container(
+          padding: EdgeInsets.all(15),
+           height: 50,
+           width:50,
+        decoration:BoxDecoration(
+          shape:BoxShape.circle,
+          color:kPrimaryColor
+        ),
+        child: SvgPicture.asset("assets/icons/plus.svg"),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -134,131 +155,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class FoodCard extends StatelessWidget {
-  final String title;
-  final String ingredient;
-  final String image;
-  final int price;
-  final String calories;
-  final String description;
-  final Function press;
-
-  const FoodCard({
-    Key key,
-    this.title,
-    this.ingredient="",
-    this.image,
-    this.price,
-    this.calories,
-    this.description, this.press,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-          child: Container(
-        margin: EdgeInsets.only(left: 10),
-        height: 350,
-        width: 220,
-        child: Stack(
-          children: <Widget>[
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: Container(
-                height: 330,
-                width: 200,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(34),
-                    color: kPrimaryColor.withOpacity(0.06)),
-              ),
-            ),
-            Positioned(
-              top: 10,
-              left: 10,
-              child: Container(
-                height: 131,
-                width: 131,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: kPrimaryColor.withOpacity(0.16)),
-              ),
-            ),
-            Positioned(
-                top: 0,
-                left: -50,
-                child: Container(
-                  height: 134,
-                  width: 226,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(image: AssetImage(image)),
-                  ),
-                )),
-            // Price
-            Positioned(
-              right: 20,
-              top: 80,
-              child: Text("\$$price",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline
-                      .copyWith(color: kPrimaryColor)),
-            ),
-            Positioned(
-                top: 201,
-                left: 40,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .title
-                          .copyWith(fontSize: 16),
-                    ),
-                    Text(ingredient,
-                        style: TextStyle(color: kTextColor.withOpacity(0.4))),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(description,
-                        maxLines: 3,
-                        style: TextStyle(color: kTextColor.withOpacity(0.65))),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "$calories Kcal",
-                    ),
-                  ],
-                ))
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class CategoryTitle extends StatelessWidget {
-  final String title;
-  final bool isActive;
-  const CategoryTitle({
-    Key key,
-    this.title,
-    this.isActive = false,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: Text(
-        title,
-        style: Theme.of(context).textTheme.button.copyWith(
-            color: isActive ? kPrimaryColor : kTextColor.withOpacity(0.4)),
-      ),
-    );
-  }
-}
