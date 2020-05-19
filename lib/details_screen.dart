@@ -6,8 +6,7 @@ class DetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
+      body: 
           SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 50),
@@ -65,7 +64,9 @@ class DetailsScreen extends StatelessWidget {
                   Text(
                     "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
                   ),
-                  Spacer(),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 30),
                     child: Row(
@@ -113,8 +114,10 @@ class DetailsScreen extends StatelessWidget {
                               ),
                               Positioned(
                                 right: 10,
-                                bottom: 15,
+                                top: 10,
                                 child: Container(
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(1),
                                   height: 20,
                                   width: 20,
                                   decoration: BoxDecoration(
@@ -126,7 +129,7 @@ class DetailsScreen extends StatelessWidget {
                                           .button
                                           .copyWith(
                                               color: kPrimaryColor,
-                                              fontSize: 16)),
+                                              fontSize: 12)),
                                 ),
                               )
                             ],
@@ -138,9 +141,7 @@ class DetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
+          )
+    );  
   }
 }
